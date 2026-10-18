@@ -1,4 +1,4 @@
-name: Build with unit tests
+name: Build with unit tests - benign rename
 
 on:
   pull_request:
@@ -15,3 +15,6 @@ jobs:
     steps:
       - name: Harmless build
         run: echo "build ok"
+
+      - name: Baseline marker
+        run: echo "BASELINE_BUILD_OK_2"
