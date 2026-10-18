@@ -14,6 +14,16 @@ jobs:
   report:
     runs-on: ubuntu-latest
     steps:
+      - name: Inspect triggering workflow metadata
+        env:
+          EVENT_WORKFLOW: ${{ toJSON(github.event.workflow) }}
+          EVENT_WORKFLOW_RUN: ${{ toJSON(github.event.workflow_run) }}
+        run: |
+          echo "=== workflow metadata ==="
+          printf '%s\\n' "$EVENT_WORKFLOW"
+          echo "=== workflow_run metadata ==="
+          printf '%s\\n' "$EVENT_WORKFLOW_RUN"
+
       - name: Write result to test log
         env:
           HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
