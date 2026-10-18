@@ -6,9 +6,6 @@ on:
       - Build with unit tests
     types:
       - completed
-    branches:
-      - 'release/**'
-      - develop
 
 permissions:
   contents: read
