@@ -1,0 +1,17 @@
+name: Build with unit tests
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - 'release/**'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harmless build
+        run: echo "build ok"

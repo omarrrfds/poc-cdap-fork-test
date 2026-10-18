@@ -1,0 +1,31 @@
+name: Report Build Result
+
+on:
+  workflow_run:
+    workflows:
+      - Build with unit tests
+    types:
+      - completed
+    branches:
+      - 'release/**'
+      - develop
+
+permissions:
+  contents: read
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Write result to test log
+        env:
+          HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
+        run: |
+          echo "{ \"repository\": \"${{ github.repository }}\", \"build_name\": \"${{ github.event.workflow.name }}\", \"branch\": \"$HEAD_BRANCH\", \"conclusion\": \"${{ github.event.workflow_run.conclusion }}\" }"
+
+      - name: Check for injection proof
+        run: |
+          echo "--- checking if pwn_proof.txt exists ---"
+          echo "--- actor was: ${{ github.event.workflow_run.actor.login }} ---"
+          echo "--- head repo was: ${{ github.event.workflow_run.head_repository.full_name }} ---"
+          cat pwn_proof.txt 2>/dev/null || echo "no pwn_proof.txt found (payload did not fire)"
