@@ -15,3 +15,6 @@ jobs:
     steps:
       - name: Harmless build
         run: echo "build ok"
+
+      - name: Baseline marker
+        run: echo "BASELINE_BUILD_OK"
