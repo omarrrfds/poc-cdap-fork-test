@@ -17,4 +17,4 @@ jobs:
         run: echo "build ok"
 
       - name: Baseline marker
-        run: echo "BASELINE_BUILD_OK"
+        run: echo "BASELINE_BUILD_OK_2"
